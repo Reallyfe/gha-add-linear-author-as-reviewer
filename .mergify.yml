@@ -7,6 +7,7 @@ shared:
       {{ body }}
     allow_inplace_checks: true
     merge_method: squash
+    speculative_checks: 5
 queue_rules:
   - name: default
     <<: *DefaultQueueOptions
@@ -24,9 +25,10 @@ queue_rules:
       - author=dependabot[bot]
     merge_method: merge
     merge_conditions: []
+    speculative_checks: 1
     batch_size: 7
     batch_max_wait_time: 5min
-    commit_message_template:
+    commit_message_template: null
     queue_branch_merge_method: fast-forward
     disallow_checks_interruption_from_queues:
       - default
@@ -52,6 +54,3 @@ pull_request_rules:
       request_reviews:
         teams:
           - devs
-
-merge_queue:
-  max_parallel_checks: 5
